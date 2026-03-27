@@ -37,5 +37,11 @@ jobs:
       - name: Save docker image to tar
         run: docker save $IMAGE -o calculator.tar
 
-      - name: Debug
-        run: ls -al | grep *.tar
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          source: "calculator.tar"
+          target: "/home/devops/"
