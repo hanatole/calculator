@@ -35,7 +35,7 @@ jobs:
         run: docker buildx build -t $IMAGE . --load
 
       - name: Save docker image to tar
-        run: docker save $IMAGE -o "$IMAGE.tar"
+        run: docker save $IMAGE -o calculator.tar
 
       - name: Debug
         run: ls -al | grep *.tar
