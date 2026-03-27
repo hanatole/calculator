@@ -55,10 +55,11 @@ jobs:
         script: |
           docker load -i calculator.tar
           rm calculator.tar
-          sudo su
-          mkdir -p /srv/calculator
-          mv "/home/${{secrets.USERNAME}/compose.yml" /srv/calculator/
+
+          sudo mkdir -p /srv/calculator
+          sudo mv "/home/${{ secrets.USERNAME }}/compose.yml" /srv/calculator/
+
           cd /srv/calculator
-          docker compose down
-          docker compose up -d
+          sudo docker compose down
+          sudo docker compose up -d
           
