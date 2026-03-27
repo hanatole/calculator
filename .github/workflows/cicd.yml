@@ -43,5 +43,22 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          source: "calculator.tar"
-          target: "/home/devops/"
+          source: "calculator.tar,compose.yml"
+          target: "/home/${{secrets.USERNAME}/"
+
+      - name: Launch compose
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+        script: |
+          docker load -i calculator.tar
+          rm calculator.tar
+          sudo su
+          mkdir -p /srv/calculator
+          mv "/home/${{secrets.USERNAME}/compose.yml" /srv/calculator/
+          cd /srv/calculator
+          docker compose down
+          docker compose up -d
+          
