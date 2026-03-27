@@ -52,14 +52,14 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-        script: |
-          docker load -i calculator.tar
-          rm calculator.tar
-
-          sudo mkdir -p /srv/calculator
-          sudo mv "/home/${{ secrets.USERNAME }}/compose.yml" /srv/calculator/
-
-          cd /srv/calculator
-          sudo docker compose down
-          sudo docker compose up -d
+          script: |
+            docker load -i calculator.tar
+            rm calculator.tar
+  
+            sudo mkdir -p /srv/calculator
+            sudo mv /home/${{ secrets.USERNAME }}/compose.yml /srv/calculator/
+  
+            cd /srv/calculator
+            sudo docker compose down
+            sudo docker compose up -d
           
