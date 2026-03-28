@@ -46,6 +46,9 @@ jobs:
           source: "calculator.tar,compose.yml,nginx.conf"
           target: /home/${{secrets.USERNAME}}/
 
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
       - name: Launch compose
         uses: appleboy/ssh-action@v1
         with:
