@@ -48,6 +48,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-24.04
+    needs:
+      - build
     steps:
       - name: Launch compose
         uses: appleboy/ssh-action@v1
